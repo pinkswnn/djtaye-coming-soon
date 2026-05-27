@@ -4,32 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Flatlyne Entertainment — Coming Soon</title>
-    <meta name="description" content="Flatlyne Entertainment — DJ services. Booking link coming soon." />
+    <meta name="description" content="Flatlyne Entertainment — Coming Soon" />
+
     <style>
-      body { margin: 0; font-family: Arial, sans-serif; background: #0b0b0f; color: #fff; }
-      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
-      .frame {
-        position: relative; width: 100%; height: 0;
-        padding-top: 140%; /* increase/decrease if you want it taller/shorter */
-        box-shadow: 0 2px 8px rgba(63,69,81,0.16);
-        overflow: hidden; border-radius: 12px;
+      :root {
+        --bg: #0b0b0f;
+        --card: rgba(255, 255, 255, 0.04);
+        --radius: 14px;
       }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: #fff;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+
+      /* Responsive 16:9 frame */
+      .frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9; /* modern + clean */
+        background: var(--card);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      }
+
+      /* Fallback for older browsers that don't support aspect-ratio */
+      @supports not (aspect-ratio: 16 / 9) {
+        .frame {
+          height: 0;
+          padding-top: 56.25%;
+        }
+      }
+
       .frame iframe {
-        position: absolute; inset: 0; width: 100%; height: 100%;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         border: 0;
+      }
+
+      /* Optional: keep it feeling “full screen” on mobile */
+      @media (max-width: 640px) {
+        .wrap { padding: 10px; }
+        .frame { border-radius: 12px; }
       }
     </style>
   </head>
+
   <body>
-    <div class="wrap">
-      <div class="frame">
+    <main class="wrap">
+      <section class="frame" aria-label="Coming soon presentation">
         <iframe
           loading="lazy"
           src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
           allowfullscreen="allowfullscreen"
           allow="fullscreen">
         </iframe>
-      </div>
-    </div>
+      </section>
+    </main>
   </body>
 </html>
