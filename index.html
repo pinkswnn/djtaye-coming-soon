@@ -1,76 +1,219 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Flatlyne Entertainment — Coming Soon</title>
-    <meta name="description" content="Flatlyne Entertainment — Coming Soon" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Flatlyne Entertainment — Coming Soon</title>
+		<meta
+			name="description"
+			content="Flatlyne Entertainment — DJ services. Booking is open. Text for availability."
+		/>
 
-    <style>
-      :root {
-        --bg: #0b0b0f;
-        --card: rgba(255, 255, 255, 0.04);
-        --radius: 14px;
-      }
+		<!-- Social share preview (optional but clean) -->
+		<meta property="og:title" content="Flatlyne Entertainment — Coming Soon" />
+		<meta
+			property="og:description"
+			content="Booking is open. Text for availability."
+		/>
+		<meta property="og:type" content="website" />
 
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: #fff;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      }
+		<style>
+			:root {
+				--bg: #0b0b0f;
+				--card: rgba(255, 255, 255, 0.06);
+				--border: rgba(255, 255, 255, 0.12);
+				--text: rgba(255, 255, 255, 0.92);
+				--muted: rgba(255, 255, 255, 0.72);
+				--primary: #2d6bff;
+				--radius: 16px;
+			}
 
-      .wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 16px;
-      }
+			* {
+				box-sizing: border-box;
+			}
 
-      /* Responsive 16:9 frame */
-      .frame {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 9; /* modern + clean */
-        background: var(--card);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      }
+			body {
+				margin: 0;
+				background: radial-gradient(
+						1200px 600px at 20% 0%,
+						rgba(45, 107, 255, 0.22),
+						transparent 60%
+					),
+					var(--bg);
+				color: var(--text);
+				font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+			}
 
-      /* Fallback for older browsers that don't support aspect-ratio */
-      @supports not (aspect-ratio: 16 / 9) {
-        .frame {
-          height: 0;
-          padding-top: 56.25%;
-        }
-      }
+			.wrap {
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 14px;
+			}
 
-      .frame iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
+			header {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+				gap: 12px;
+				margin-bottom: 12px;
+			}
 
-      /* Optional: keep it feeling “full screen” on mobile */
-      @media (max-width: 640px) {
-        .wrap { padding: 10px; }
-        .frame { border-radius: 12px; }
-      }
-    </style>
-  </head>
+			.brand h1 {
+				font-size: 18px;
+				line-height: 1.2;
+				margin: 0;
+				letter-spacing: 0.2px;
+			}
 
-  <body>
-    <main class="wrap">
-      <section class="frame" aria-label="Coming soon presentation">
-        <iframe
-          loading="lazy"
-          src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
-          allowfullscreen="allowfullscreen"
-          allow="fullscreen">
-        </iframe>
-      </section>
-    </main>
-  </body>
+			.brand p {
+				margin: 6px 0 0 0;
+				color: var(--muted);
+				font-size: 14px;
+			}
+
+			.ctaRow {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin: 12px 0 14px;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				padding: 12px 14px;
+				border-radius: 999px;
+				text-decoration: none;
+				background: var(--card);
+				color: var(--text);
+				border: 1px solid var(--border);
+				font-weight: 700;
+				font-size: 14px;
+				white-space: nowrap;
+			}
+
+			.btnPrimary {
+				background: var(--primary);
+				border-color: var(--primary);
+				color: #fff;
+			}
+
+			.btn:active {
+				transform: translateY(1px);
+			}
+
+			.helper {
+				color: var(--muted);
+				font-size: 12px;
+				margin: 0 0 12px 0;
+			}
+
+			/* Embed container */
+			.frame {
+				position: relative;
+				width: 100%;
+				border-radius: var(--radius);
+				overflow: hidden;
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+				background: #000;
+				border: 1px solid rgba(255, 255, 255, 0.08);
+			}
+
+			/* Desktop/tablet = presentation ratio */
+			.frame {
+				aspect-ratio: 16 / 9;
+			}
+
+			/* Mobile = stop the “tiny strip at the top” problem */
+			@media (max-width: 640px) {
+				.wrap {
+					padding: 10px;
+				}
+				header {
+					flex-direction: column;
+				}
+				.frame {
+					aspect-ratio: auto;
+					height: 82vh;
+				}
+				.btn {
+					flex: 1 1 auto;
+				}
+			}
+
+			.frame iframe {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+			}
+
+			footer {
+				margin-top: 12px;
+				color: var(--muted);
+				font-size: 12px;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			footer a {
+				color: var(--muted);
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+
+	<body>
+		<main class="wrap">
+			<header>
+				<div class="brand">
+					<h1>Flatlyne Entertainment</h1>
+					<p>Coming soon. Booking is open now.</p>
+				</div>
+			</header>
+
+			<!-- High-EQ: clear next step + no pressure -->
+			<div class="ctaRow">
+				<a
+					class="btn btnPrimary"
+					href="sms:+12144028571?body=Hi%20DJ%20Taye%20%E2%80%94%20I%27d%20like%20to%20check%20availability.%20Event%20date%3A%20____%20%7C%20City%3A%20____%20%7C%20Hours%3A%20____"
+					>Text to check availability</a
+				>
+				<a class="btn" href="tel:+12144028571">Call</a>
+			</div>
+
+			<p class="helper">
+				If the text button doesn’t open on your device, text: <strong>(214)
+				402-8571</strong>
+			</p>
+
+			<!-- Canva presentation embed: visual-only, CTAs handled above -->
+			<section class="frame" aria-label="Coming soon presentation">
+				<iframe
+					loading="lazy"
+					src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
+					allowfullscreen="allowfullscreen"
+					allow="fullscreen"
+				></iframe>
+			</section>
+
+			<footer>
+				<span>© Flatlyne Entertainment</span>
+				<span
+					><a
+						href="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?utm_content=DAHK44CvDpg&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+						target="_blank"
+						rel="noopener"
+						>Open full view</a
+					></span
+				>
+			</footer>
+		</main>
+	</body>
 </html>
