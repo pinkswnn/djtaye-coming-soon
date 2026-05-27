@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Coming Soon</title>
+    <meta name="description" content="Full site coming soon. Booking is open now." />
 
     <style>
       :root{
         --bgImg: url("https://pinkswann.com/wp-content/uploads/2026/05/djtaye1.jpg");
+        --ctaBlue: rgba(45,107,255,.96);
+        --ctaBlueBorder: rgba(45,107,255,.96);
+        --radius: 12px;
       }
-      html, body { height: 100%; }
+
+      *{ box-sizing:border-box; }
+      html, body { height:100%; }
+
       body{
         margin:0;
         font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -17,73 +24,95 @@
         overflow-x:hidden;
       }
 
+      /* Background image (blurred echo) */
       .bg{
-        position:fixed; inset:0;
+        position: fixed;
+        inset: 0;
+        z-index: 0;
         background-image: var(--bgImg);
-        background-size:cover;
-        background-position:center;
-        transform:scale(1.08);
-        filter: blur(26px) saturate(1.05) contrast(1.05);
-        opacity:.55;
-        z-index:-2;
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.08);
+        filter: blur(22px) saturate(1.15) contrast(1.1);
+        opacity: 0.95;
       }
+
+      /* Dark tint overlay so Canva stays readable */
       .overlay{
-        position:fixed; inset:0;
-        background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.78));
-        z-index:-1;
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        background:
+          radial-gradient(900px 500px at 20% 0%, rgba(45,107,255,.18), transparent 60%),
+          linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.45));
       }
 
+      /* Content layer */
       .wrap{
-        max-width:1100px;
-        margin:0 auto;
-        padding:16px;
+        position: relative;
+        z-index: 2;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px;
       }
 
-      /* Text-only CTA (outside iframe so sms works properly) */
-      .ctaBar{ display:flex; justify-content:flex-end; margin:8px 0 10px; }
-      .btn{
-        display:inline-flex; align-items:center; justify-content:center;
-        padding:12px 14px;
-        border-radius:999px;
-        text-decoration:none;
-        font-weight:750; font-size:14px;
-        color:#fff;
-        background: rgba(45,107,255,.95);
-        border:1px solid rgba(45,107,255,.95);
-        box-shadow:0 10px 26px rgba(0,0,0,.35);
-        white-space:nowrap;
-      }
-      .helper{
-        margin:0 0 10px 0;
-        font-size:12px;
-        color: rgba(255,255,255,.72);
-        text-align:right;
+      /* 9:16 Canva embed wrapper (matches padding-top: 177.7778%) */
+      .canvaWrap{
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-top: 177.7778%;
+        padding-bottom: 0;
+        overflow: hidden;
+        border-radius: var(--radius);
+        box-shadow: 0 2px 8px rgba(63,69,81,0.16);
+        background: rgba(0,0,0,.25);
       }
 
-      /* Canva embed frame */
-      .frame{
-        position:relative;
-        width:100%;
-        height:0;
-        padding-top:56.25%; /* 16:9 */
-        overflow:hidden;
-        border-radius:12px;
-        background: rgba(0,0,0,.35);
-        border:1px solid rgba(255,255,255,.10);
-        box-shadow:0 22px 60px rgba(0,0,0,.55);
-      }
-      .frame iframe{
-        position:absolute; inset:0;
-        width:100%; height:100%;
-        border:0;
+      .canvaWrap iframe{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 0;
+        margin: 0;
       }
 
+      /* Floating "Text to book" CTA over the embed */
+      .floatingCta{
+        position: absolute;
+        z-index: 5;
+        right: 14px;
+        bottom: 14px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 12px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+
+        font-weight: 750;
+        font-size: 14px;
+
+        color: #fff;
+        background: var(--ctaBlue);
+        border: 1px solid var(--ctaBlueBorder);
+        box-shadow: 0 10px 26px rgba(0,0,0,.35);
+        white-space: nowrap;
+      }
+
+      /* Mobile: make CTA thumb-friendly and centered */
       @media (max-width: 640px){
-        .wrap{ padding:10px; }
-        .ctaBar{ justify-content:stretch; }
-        .btn{ width:100%; }
-        .helper{ text-align:left; }
-        .frame{ padding-top:0; height:84vh; }
+        .wrap{ padding: 10px; }
+        .floatingCta{
+          left: 12px;
+          right: 12px;
+          bottom: 12px;
+          width: auto;
+        }
       }
     </style>
   </head>
@@ -93,24 +122,20 @@
     <div class="overlay"></div>
 
     <main class="wrap">
-      <div class="ctaBar">
-        <a class="btn"
-           href="sms:+12144028571?body=Hi%20DJ%20Taye%20%E2%80%94%20I%27d%20like%20to%20check%20availability.%20Event%20date%3A%20____%20%7C%20City%3A%20____%20%7C%20Hours%3A%20____">
-          Text To Book
-        </a>
-      </div>
-
-      <p class="helper">
-        If the button doesn’t open, text: <strong>(214) 402-8571</strong>
-      </p>
-
-      <div class="frame">
+      <div class="canvaWrap">
         <iframe
           loading="lazy"
-          src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
+          src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/watch?embed"
           allowfullscreen="allowfullscreen"
           allow="fullscreen; autoplay"
         ></iframe>
+
+        <a
+          class="floatingCta"
+          href="sms:+12144028571?body=Hi%20DJ%20Taye%20%E2%80%94%20I%27d%20like%20to%20check%20availability.%20Event%20date%3A%20____%20%7C%20City%3A%20____%20%7C%20Hours%3A%20____"
+        >
+          Text to book
+        </a>
       </div>
     </main>
   </body>
