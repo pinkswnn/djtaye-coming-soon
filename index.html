@@ -1,219 +1,154 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Flatlyne Entertainment — Coming Soon</title>
-		<meta
-			name="description"
-			content="Flatlyne Entertainment — DJ services. Booking is open. Text for availability."
-		/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coming Soon</title>
+    <meta name="description" content="Full site coming soon. Booking is open now." />
 
-		<!-- Social share preview (optional but clean) -->
-		<meta property="og:title" content="Flatlyne Entertainment — Coming Soon" />
-		<meta
-			property="og:description"
-			content="Booking is open. Text for availability."
-		/>
-		<meta property="og:type" content="website" />
+    <style>
+      :root{
+        --bgImg: url("https://pinkswann.com/wp-content/uploads/2026/05/djtaye1.jpg");
+        --glass: rgba(10,10,14,.50);
+        --border: rgba(255,255,255,.14);
+        --text: rgba(255,255,255,.92);
+        --muted: rgba(255,255,255,.70);
+        --primary: #2D6BFF;
+        --radius: 18px;
+      }
 
-		<style>
-			:root {
-				--bg: #0b0b0f;
-				--card: rgba(255, 255, 255, 0.06);
-				--border: rgba(255, 255, 255, 0.12);
-				--text: rgba(255, 255, 255, 0.92);
-				--muted: rgba(255, 255, 255, 0.72);
-				--primary: #2d6bff;
-				--radius: 16px;
-			}
+      *{ box-sizing:border-box; }
 
-			* {
-				box-sizing: border-box;
-			}
+      body{
+        margin:0;
+        min-height:100vh;
+        color:var(--text);
+        font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        background:#06060a;
+        overflow-x:hidden;
+      }
 
-			body {
-				margin: 0;
-				background: radial-gradient(
-						1200px 600px at 20% 0%,
-						rgba(45, 107, 255, 0.22),
-						transparent 60%
-					),
-					var(--bg);
-				color: var(--text);
-				font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-			}
+      /* Blurred echo background */
+      body::before{
+        content:"";
+        position:fixed;
+        inset:0;
+        background-image: var(--bgImg);
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.06);
+        filter: blur(26px) saturate(1.05) contrast(1.05);
+        opacity: .45;
+        z-index:-2;
+      }
 
-			.wrap {
-				max-width: 1100px;
-				margin: 0 auto;
-				padding: 14px;
-			}
+      /* Dark overlay so text + embed pop */
+      body::after{
+        content:"";
+        position:fixed;
+        inset:0;
+        background: radial-gradient(900px 500px at 20% 0%, rgba(45,107,255,.20), transparent 60%),
+                    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.72));
+        z-index:-1;
+      }
 
-			header {
-				display: flex;
-				align-items: flex-start;
-				justify-content: space-between;
-				gap: 12px;
-				margin-bottom: 12px;
-			}
+      .wrap{
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 12px;
+      }
 
-			.brand h1 {
-				font-size: 18px;
-				line-height: 1.2;
-				margin: 0;
-				letter-spacing: 0.2px;
-			}
+      /* Text-only CTA (outside Canva iframe, so sms works everywhere it can) */
+      .ctaBar{
+        display:flex;
+        justify-content:flex-end;
+        margin: 8px 0 10px;
+      }
 
-			.brand p {
-				margin: 6px 0 0 0;
-				color: var(--muted);
-				font-size: 14px;
-			}
+      .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding: 12px 14px;
+        border-radius: 999px;
+        text-decoration:none;
+        font-weight: 750;
+        font-size: 14px;
+        color: #fff;
+        background: rgba(45,107,255,.95);
+        border: 1px solid rgba(45,107,255,.95);
+        box-shadow: 0 10px 26px rgba(0,0,0,.35);
+        white-space: nowrap;
+      }
 
-			.ctaRow {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 10px;
-				margin: 12px 0 14px;
-			}
+      .helper{
+        margin: 0 0 10px 0;
+        font-size: 12px;
+        color: var(--muted);
+        text-align: right;
+      }
 
-			.btn {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				gap: 8px;
-				padding: 12px 14px;
-				border-radius: 999px;
-				text-decoration: none;
-				background: var(--card);
-				color: var(--text);
-				border: 1px solid var(--border);
-				font-weight: 700;
-				font-size: 14px;
-				white-space: nowrap;
-			}
+      /* Canva embed card */
+      .frame{
+        position: relative;
+        width: 100%;
+        border-radius: var(--radius);
+        overflow:hidden;
+        background: rgba(0,0,0,.35);
+        border: 1px solid rgba(255,255,255,.10);
+        box-shadow: 0 22px 60px rgba(0,0,0,.55);
+      }
 
-			.btnPrimary {
-				background: var(--primary);
-				border-color: var(--primary);
-				color: #fff;
-			}
+      /* Desktop/tablet = presentation ratio */
+      .frame{ aspect-ratio: 16 / 9; }
 
-			.btn:active {
-				transform: translateY(1px);
-			}
+      /* Mobile: avoid tiny landscape strip */
+      @media (max-width: 640px){
+        .wrap{ padding: 10px; }
+        .ctaBar{ justify-content: stretch; }
+        .btn{ width: 100%; }
+        .helper{ text-align: left; }
+        .frame{
+          aspect-ratio: auto;
+          height: 84vh;
+        }
+      }
 
-			.helper {
-				color: var(--muted);
-				font-size: 12px;
-				margin: 0 0 12px 0;
-			}
+      .frame iframe{
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        border:0;
+      }
+    </style>
+  </head>
 
-			/* Embed container */
-			.frame {
-				position: relative;
-				width: 100%;
-				border-radius: var(--radius);
-				overflow: hidden;
-				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-				background: #000;
-				border: 1px solid rgba(255, 255, 255, 0.08);
-			}
+  <body>
+    <main class="wrap">
 
-			/* Desktop/tablet = presentation ratio */
-			.frame {
-				aspect-ratio: 16 / 9;
-			}
+      <div class="ctaBar">
+        <a
+          class="btn"
+          href="sms:+12144028571?body=Hi%20DJ%20Taye%20%E2%80%94%20I%27d%20like%20to%20check%20availability.%20Event%20date%3A%20____%20%7C%20City%3A%20____%20%7C%20Hours%3A%20____"
+        >
+          Text to book
+        </a>
+      </div>
 
-			/* Mobile = stop the “tiny strip at the top” problem */
-			@media (max-width: 640px) {
-				.wrap {
-					padding: 10px;
-				}
-				header {
-					flex-direction: column;
-				}
-				.frame {
-					aspect-ratio: auto;
-					height: 82vh;
-				}
-				.btn {
-					flex: 1 1 auto;
-				}
-			}
+      <p class="helper">
+        If the button doesn’t open, text: <strong>(214) 402-8571</strong>
+      </p>
 
-			.frame iframe {
-				position: absolute;
-				inset: 0;
-				width: 100%;
-				height: 100%;
-				border: 0;
-			}
+      <section class="frame" aria-label="Coming soon presentation">
+        <iframe
+          loading="lazy"
+          src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
+          allowfullscreen="allowfullscreen"
+          allow="fullscreen"
+        ></iframe>
+      </section>
 
-			footer {
-				margin-top: 12px;
-				color: var(--muted);
-				font-size: 12px;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 10px;
-				justify-content: space-between;
-				align-items: center;
-			}
-
-			footer a {
-				color: var(--muted);
-				text-decoration: underline;
-			}
-		</style>
-	</head>
-
-	<body>
-		<main class="wrap">
-			<header>
-				<div class="brand">
-					<h1>Flatlyne Entertainment</h1>
-					<p>Coming soon. Booking is open now.</p>
-				</div>
-			</header>
-
-			<!-- High-EQ: clear next step + no pressure -->
-			<div class="ctaRow">
-				<a
-					class="btn btnPrimary"
-					href="sms:+12144028571?body=Hi%20DJ%20Taye%20%E2%80%94%20I%27d%20like%20to%20check%20availability.%20Event%20date%3A%20____%20%7C%20City%3A%20____%20%7C%20Hours%3A%20____"
-					>Text to check availability</a
-				>
-				<a class="btn" href="tel:+12144028571">Call</a>
-			</div>
-
-			<p class="helper">
-				If the text button doesn’t open on your device, text: <strong>(214)
-				402-8571</strong>
-			</p>
-
-			<!-- Canva presentation embed: visual-only, CTAs handled above -->
-			<section class="frame" aria-label="Coming soon presentation">
-				<iframe
-					loading="lazy"
-					src="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?embed"
-					allowfullscreen="allowfullscreen"
-					allow="fullscreen"
-				></iframe>
-			</section>
-
-			<footer>
-				<span>© Flatlyne Entertainment</span>
-				<span
-					><a
-						href="https://www.canva.com/design/DAHK44CvDpg/oCjLZ_1y8f7G4CO5nPGVyA/view?utm_content=DAHK44CvDpg&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
-						target="_blank"
-						rel="noopener"
-						>Open full view</a
-					></span
-				>
-			</footer>
-		</main>
-	</body>
+    </main>
+  </body>
 </html>
